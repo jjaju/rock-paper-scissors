@@ -2,19 +2,6 @@ var TARGET_WEIGHT = 0.7;
 var FLEE_WEIGHT = 1 - TARGET_WEIGHT;
 var LETHAL_DISTANCE = 40;
 
-function typeIcon(type) {
-    switch (type) {
-        case handType.ROCK:
-            return rockIcon;
-        case handType.PAPER:
-            return paperIcon;
-        case handType.SCISSOR:
-            return scissorIcon;
-        default:
-            return rockIcon;
-    }
-}
-
 function Hand(pos, type) {
     this.pos = pos.copy();
     this.type = type;
@@ -23,7 +10,13 @@ function Hand(pos, type) {
     this.vel = Math.random() * 0.5 + 1.5;
 
     this.display = function () {
-        image(typeIcon(this.type), this.pos.x - 100, this.pos.y - 60, 200, 120)
+        image(
+            getTypeIcon(this.type),
+            this.pos.x - 100,
+            this.pos.y - 60,
+            200,
+            120
+        );
     };
 
     this.update = function (n) {
@@ -40,13 +33,18 @@ function Hand(pos, type) {
 
     this.updatePosNN = function (n) {
         let fleeNNs = getNearestNeighbours(this, allHands[this.fleeType], n);
-        let targetNNs = getNearestNeighbours(this, allHands[this.targetType], n);
+        let targetNNs = getNearestNeighbours(
+            this,
+            allHands[this.targetType],
+            n
+        );
 
         let fleeCentroid = computeCentroid(fleeNNs);
         let targetCentroid = computeCentroid(targetNNs);
 
-        let individualFleeWeight = (fleeCentroid.x === -1) ? 0 : FLEE_WEIGHT;
-        let individualTargetWeight = (targetCentroid.x === -1) ? 0 : TARGET_WEIGHT;
+        let individualFleeWeight = fleeCentroid.x === -1 ? 0 : FLEE_WEIGHT;
+        let individualTargetWeight =
+            targetCentroid.x === -1 ? 0 : TARGET_WEIGHT;
 
         let toTarget = targetCentroid
             .sub(this.pos)

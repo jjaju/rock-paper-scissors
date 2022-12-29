@@ -8,21 +8,13 @@ var scissors = [];
 var allHands = [rocks, papers, scissors];
 var hands = [];
 
-var rockIcon;
-var paperIcon;
-var scissorIcon;
-
 function setup() {
-    rockIcon = loadImage("./assets/rockTransp.png");
-    paperIcon = loadImage("./assets/paperTransp.png");
-    scissorIcon = loadImage("./assets/scissorTransp.png");
+    initTypeIconMapping();
     createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
     background(0);
     for (let j = 0; j < 3; j++) {
         for (let i = 0; i < 30; i++) {
-            hands.push(
-                new Hand(getRandomPoint(), j)
-            );
+            hands.push(new Hand(getRandomPoint(), j));
         }
     }
     hands.forEach((h) => h.display());
