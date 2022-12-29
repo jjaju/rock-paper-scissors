@@ -1,6 +1,10 @@
 const SCREEN_WIDTH = window.innerWidth;
 const SCREEN_HEIGHT = window.innerHeight;
 
+function preload() {
+    preLoadSounds();
+}
+
 function setup() {
     initTypeIconMapping();
     createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
