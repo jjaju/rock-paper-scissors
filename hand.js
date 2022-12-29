@@ -1,5 +1,5 @@
 var TARGET_WEIGHT = 0.7;
-var FLEE_WEIGHT = 1-TARGET_WEIGHT;
+var FLEE_WEIGHT = 1 - TARGET_WEIGHT;
 var LETHAL_DISTANCE = 40;
 
 function typeIcon(type) {
@@ -38,15 +38,15 @@ function Hand(pos, type) {
         this.display();
     };
 
-    this.updatePosNN = function (n){
+    this.updatePosNN = function (n) {
         let fleeNNs = getNearestNeighbours(this, allHands[this.fleeType], n);
         let targetNNs = getNearestNeighbours(this, allHands[this.targetType], n);
 
         let fleeCentroid = computeCentroid(fleeNNs);
         let targetCentroid = computeCentroid(targetNNs);
 
-        let individualFleeWeight = (fleeCentroid.x === -1) ? 0 : FLEE_WEIGHT; 
-        let individualTargetWeight = (targetCentroid.x === -1) ? 0 : TARGET_WEIGHT; 
+        let individualFleeWeight = (fleeCentroid.x === -1) ? 0 : FLEE_WEIGHT;
+        let individualTargetWeight = (targetCentroid.x === -1) ? 0 : TARGET_WEIGHT;
 
         let toTarget = targetCentroid
             .sub(this.pos)
