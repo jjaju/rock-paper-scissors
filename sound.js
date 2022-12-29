@@ -1,14 +1,37 @@
-var testSound;
+var rockSound;
+var paperSound;
+var scissorSound;
+var typeSoundMap;
+var lastTime = 0;
+var sound;
 
 function preLoadSounds() {
-    testSound = loadSound("./assets/sounds/test.mp3");
+    rockSound = loadSound("./assets/sounds/rock.mp3");
+    paperSound = loadSound("./assets/sounds/paper.mp3");
+    scissorSound = loadSound("./assets/sounds/scissor.mp3");
 }
 
-function playSound() {
-    if (testSound.isLoaded()) {
-        console.log("YEEE")
-    } else {
-        console.log("AAHH")
+function getTypeSound(type) {
+    return typeSoundMap.get(type);
+}
+
+function playSound(type) {
+    sound = getTypeSound(type);
+    if (sound.isLoaded()) {
+        // lower volume for subsequent sounds to avoid distortion
+        time = new Date().getTime();
+        let passedTime = (time - lastTime) / 1000;
+        delay = (passedTime > 1) ? 0 : 0.5; 
+        sound.setVolume(min(1, passedTime), delay);
+        sound.play();
+        lastTime = time;
     }
-    testSound.play();
+}
+
+function initTypeSoundMapping() {
+    preLoadSounds();
+    typeSoundMap = new Map();
+    typeSoundMap.set(handType.ROCK, rockSound);
+    typeSoundMap.set(handType.PAPER, paperSound);
+    typeSoundMap.set(handType.SCISSOR, scissorSound);
 }

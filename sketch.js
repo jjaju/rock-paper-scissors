@@ -1,11 +1,8 @@
 const SCREEN_WIDTH = window.innerWidth;
 const SCREEN_HEIGHT = window.innerHeight;
 
-function preload() {
-    preLoadSounds();
-}
-
 function setup() {
+    initTypeSoundMapping();
     initTypeIconMapping();
     createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
     background(0);
@@ -24,4 +21,8 @@ function getRandomPosition() {
         Math.random() * SCREEN_WIDTH,
         Math.random() * SCREEN_HEIGHT
     );
+}
+
+function mousePressed() {
+    userStartAudio();
 }
