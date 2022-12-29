@@ -4,6 +4,7 @@ const SCREEN_HEIGHT = window.innerHeight;
 function setup() {
     initTypeSoundMapping();
     initTypeIconMapping();
+    initHandsData();
     createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
     background(0);
     initHands();

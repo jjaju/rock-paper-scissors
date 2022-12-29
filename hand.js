@@ -1,6 +1,7 @@
 var TARGET_WEIGHT = 0.7;
 var FLEE_WEIGHT = 1 - TARGET_WEIGHT;
-var LETHAL_DISTANCE = 40;
+var lethalDistance;
+var iconSize;
 
 function Hand(pos, type) {
     this.pos = pos.copy();
@@ -8,21 +9,21 @@ function Hand(pos, type) {
     this.fleeType = (type + 1) % 3;
     this.targetType = (type + 2) % 3;
     this.vel = Math.random() * 0.5 + 1.5;
-
+    
     this.display = function () {
         image(
             getTypeIcon(this.type),
-            this.pos.x - 100,
-            this.pos.y - 60,
-            200,
-            120
+            this.pos.x - iconSize * 0.5,
+            this.pos.y - iconSize * 0.3,
+            iconSize,
+            iconSize * 0.6
         );
     };
 
     this.update = function (n) {
         this.updatePosNN(n);
         for (const hand of handCollections[this.fleeType]) {
-            if (hand.pos.dist(this.pos) < LETHAL_DISTANCE) {
+            if (hand.pos.dist(this.pos) < lethalDistance) {
                 this.type = hand.type;
                 this.fleeType = (hand.type + 1) % 3;
                 this.targetType = (hand.type + 2) % 3;
@@ -61,4 +62,9 @@ function Hand(pos, type) {
         this.pos.x = min(max(this.pos.x, 0), SCREEN_WIDTH);
         this.pos.y = min(max(this.pos.y, 0), SCREEN_HEIGHT);
     };
+}
+
+function initHandsData(){
+    iconSize = min(SCREEN_WIDTH, SCREEN_HEIGHT) / 4;
+    lethalDistance = iconSize * 0.23;
 }
