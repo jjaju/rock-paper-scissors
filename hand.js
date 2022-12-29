@@ -21,7 +21,7 @@ function Hand(pos, type) {
 
     this.update = function (n) {
         this.updatePosNN(n);
-        for (const hand of allHands[this.fleeType]) {
+        for (const hand of handCollections[this.fleeType]) {
             if (hand.pos.dist(this.pos) < LETHAL_DISTANCE) {
                 this.type = hand.type;
                 this.fleeType = (hand.type + 1) % 3;
@@ -32,10 +32,10 @@ function Hand(pos, type) {
     };
 
     this.updatePosNN = function (n) {
-        let fleeNNs = getNearestNeighbours(this, allHands[this.fleeType], n);
+        let fleeNNs = getNearestNeighbours(this, handCollections[this.fleeType], n);
         let targetNNs = getNearestNeighbours(
             this,
-            allHands[this.targetType],
+            handCollections[this.targetType],
             n
         );
 
