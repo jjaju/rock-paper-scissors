@@ -21,6 +21,16 @@ function updateHandCollections() {
     handCollections = [rocks, papers, scissors];
 }
 
+function checkEndGame() {
+    let emptyCollections = 0;
+    for (coll of handCollections) {
+        emptyCollections = (coll.length != 0) ? emptyCollections : emptyCollections + 1;
+    }
+    if (emptyCollections > 1) {
+        endGame();
+    }
+}
+
 function computeCentroid(hands) {
     if (!hands.length) return createVector(-1, -1);
     else {

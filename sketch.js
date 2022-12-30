@@ -20,6 +20,7 @@ function setup() {
 function draw() {
     background(59, 57, 55);
     updateHandCollections();
+    checkEndGame();
     hands.forEach((h) => h.update(1));
 }
 
@@ -35,7 +36,7 @@ function mousePressed() {
 }
 
 function initHandDisplay() {
-    background(0);
+    background(59, 57, 55);
     initHands();
     hands.forEach((h) => h.display());
 }
