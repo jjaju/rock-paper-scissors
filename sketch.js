@@ -12,6 +12,7 @@ function setup() {
     frameRate(fr);
     initHands();
     hands.forEach((h) => h.display());
+    initHud()
 }
 
 function draw() {

@@ -5,33 +5,33 @@ function initGameState() {
     gameState = state.beforeStart;
 }
 
-function start() {
+function startGame() {
     if (gameState == state.beforeStart) {
         gameState = state.running;
         resumeDraw();
     }
 }
 
-function restart() {
+function restartGame() {
     gameState = state.beforeStart;
     pauseDraw();
 }
 
-function resume() {
+function resumeGame() {
     if (gameState == state.paused) {
         gameState = state.running;
         resumeDraw();
     }
 }
 
-function pause() {
+function pauseGame() {
     if (gameState == state.running) {
         gameState = state.paused;
         pauseDraw();
     }
 }
 
-function end() {
+function endGame() {
     if (gameState == state.running) {
         gameState = state.ended;
         pauseDraw();

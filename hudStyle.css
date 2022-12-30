@@ -1,0 +1,30 @@
+.hud {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2vmin;
+    margin: 2vmin;
+    top: 90%;
+    left: 50%;
+    border-radius: 20px;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 10vh;
+  }
+
+.baseButton {
+    margin: 1vw;
+    font-weight: bold;
+    min-width: 5vw;
+    min-height: 4vh;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-image: radial-gradient(rgb(0, 174, 255), rgb(11, 80, 184));
+}
+
+/* .baseButton:hover {
+    background-image: radial-gradient(rgb(134, 99, 9), rgb(134, 99, 9));
+} */
