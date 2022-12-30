@@ -6,6 +6,7 @@ var handCollections = [rocks, papers, scissors];
 var hands = [];
 
 function initHands() {
+    hands = [];
     for (let j = 0; j < 3; j++) {
         for (let i = 0; i < 30; i++) {
             hands.push(new Hand(getRandomPosition(), j));

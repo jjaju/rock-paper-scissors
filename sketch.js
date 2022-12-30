@@ -3,16 +3,18 @@ const SCREEN_HEIGHT = window.innerHeight;
 
 let fr = 30;
 
-function setup() {
+function preload() {
+    initHud();
     initTypeSoundMapping();
     initTypeIconMapping();
+    initGameState();
     initHandsData();
+}
+
+function setup() {
     createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
-    background(0);
     frameRate(fr);
-    initHands();
-    hands.forEach((h) => h.display());
-    initHud()
+    initHandDisplay();
 }
 
 function draw() {
@@ -30,6 +32,12 @@ function getRandomPosition() {
 
 function mousePressed() {
     userStartAudio();
+}
+
+function initHandDisplay() {
+    background(0);
+    initHands();
+    hands.forEach((h) => h.display());
 }
 
 function pauseDraw() {

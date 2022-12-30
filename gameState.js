@@ -3,6 +3,7 @@ var gameState;
 
 function initGameState() {
     gameState = state.beforeStart;
+    pauseDraw();
 }
 
 function startGame() {
@@ -15,6 +16,7 @@ function startGame() {
 function restartGame() {
     gameState = state.beforeStart;
     pauseDraw();
+    initHandDisplay();
 }
 
 function resumeGame() {
