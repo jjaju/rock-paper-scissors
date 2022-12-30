@@ -34,17 +34,15 @@ function checkEndGame() {
 function computeCentroid(hands) {
     if (!hands.length) return createVector(-1, -1);
     else {
-        let sumX = 0;
-        let sumY = 0;
+        let sum = createVector(0, 0);
         for (const hand of hands) {
-            sumX += hand.pos.x;
-            sumY += hand.pos.y;
+            sum.add(hand.pos);
         }
-        sumX /= hands.length;
-        sumY /= hands.length;
-        return createVector(sumX, sumY);
+        sum.div(hands.length);
+        return sum;
     }
 }
+
 
 function getNearestNeighbours(hand, hands, n) {
     sorted = hands.slice();
