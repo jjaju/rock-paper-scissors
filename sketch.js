@@ -30,3 +30,11 @@ function getRandomPosition() {
 function mousePressed() {
     userStartAudio();
 }
+
+function pauseDraw() {
+    noLoop();
+}
+
+function resumeDraw() {
+    loop();
+}
