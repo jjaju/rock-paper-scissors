@@ -18,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(59, 57, 55);
     updateHandCollections();
     hands.forEach((h) => h.update(1));
 }

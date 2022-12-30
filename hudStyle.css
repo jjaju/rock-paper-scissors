@@ -17,14 +17,24 @@
 .baseButton {
     margin: 1vw;
     font-weight: bold;
+    font-family: 'Courier New', monospace;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    color:  #eb3434;
     min-width: 5vw;
     min-height: 4vh;
     outline: none;
-    border: none;
-    border-radius: 10px;
-    background-image: radial-gradient(rgb(0, 174, 255), rgb(11, 80, 184));
+    border: 2px solid #eb3434;
+    border-radius: 3px;    
+    background-color: black;
+    opacity: 0.8;
+    transition: 0.3s;
+    display: inline-block;
 }
 
-/* .baseButton:hover {
-    background-image: radial-gradient(rgb(134, 99, 9), rgb(134, 99, 9));
-} */
+.baseButton:hover {
+    opacity: 1;
+    box-shadow: inset 0 0 0 2em #eb3434;;
+    color: white;
+}
