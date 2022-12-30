@@ -1,12 +1,15 @@
 const SCREEN_WIDTH = window.innerWidth;
 const SCREEN_HEIGHT = window.innerHeight;
 
+let fr = 30;
+
 function setup() {
     initTypeSoundMapping();
     initTypeIconMapping();
     initHandsData();
     createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
     background(0);
+    frameRate(fr);
     initHands();
     hands.forEach((h) => h.display());
 }
