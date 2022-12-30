@@ -27,7 +27,7 @@ function Hand(pos, type) {
                 this.type = hand.type;
                 this.fleeType = (hand.type + 1) % 3;
                 this.targetType = (hand.type + 2) % 3;
-                playSound(this.type);
+                //playSound(this.type);
             }
         }
         this.display();

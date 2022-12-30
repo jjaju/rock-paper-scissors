@@ -5,7 +5,7 @@ let fr = 30;
 
 function preload() {
     initHud();
-    initTypeSoundMapping();
+    //initTypeSoundMapping();
     initTypeIconMapping();
     initGameState();
     initHandsData();
