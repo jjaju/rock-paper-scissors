@@ -4,11 +4,12 @@ var papers = [];
 var scissors = [];
 var handCollections = [rocks, papers, scissors];
 var hands = [];
+var numHandsPerType = 20;
 
 function initHands() {
     hands = [];
     for (let j = 0; j < 3; j++) {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < numHandsPerType; i++) {
             hands.push(new Hand(getRandomPosition(), j));
         }
     }
@@ -43,9 +44,13 @@ function computeCentroid(hands) {
     }
 }
 
-
 function getNearestNeighbours(hand, hands, n) {
     sorted = hands.slice();
     sorted.sort((a, b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
     return sorted.slice(0, n);
+}
+
+function getNearestNeighbour(hand, hands){
+    hands.sort((a,b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
+    return hands[0];
 }

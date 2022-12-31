@@ -5,6 +5,7 @@ let fr = 30;
 
 function preload() {
     initHud();
+    initInteraction();
     //initTypeSoundMapping();
     initTypeIconMapping();
     initGameState();
@@ -32,7 +33,8 @@ function getRandomPosition() {
 }
 
 function mousePressed() {
-    userStartAudio();
+    //userStartAudio();
+    diffuse(createVector(mouseX, mouseY));
 }
 
 function initHandDisplay() {
