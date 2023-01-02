@@ -30,16 +30,6 @@ function endGame(typeThatWon) {
     hudOnGameEnd(gameWon);
 }
 
-// function restartGameOnEnd(typeToPlay) {
-//     currentlyPlayingAs = typeToPlay;
-//     if (gameState == state.ended) {
-//         initHandDisplay();
-//         gameState = state.running;
-//         resumeDraw();
-//         hudOnGameRunning;
-//     }
-// }
-
 function restartGame() {
     gameState = state.beforeStart;
     pauseDraw();

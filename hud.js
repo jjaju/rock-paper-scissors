@@ -80,37 +80,6 @@ function initHud() {
     scissorToChoose = createImg("./assets/scissorCropped.png", "");
     scissorToChoose.class("iconToChoose");
     scissorToChoose.parent(scissorButton);
-
-    // paperToChoose = createImg("./assets/paperCropped.png", "");
-    // paperToChoose.class("iconToChoose");
-    // paperToChoose.parent(handChooser);
-
-    // scissorToChoose = createImg("./assets/scissorCropped.png", "");
-    // scissorToChoose.class("iconToChoose");
-    // scissorToChoose.parent(handChooser);
-
-    // startButton = createButton("Start");
-    // startButton.class("baseButton");
-    // startButton.parent(hud);
-    // startButton.mousePressed(startPressed);
-    // startButton.hide();
-
-    // pauseButton = createButton("Pause");
-    // pauseButton.class("baseButton");
-    // pauseButton.parent(hud);
-    // pauseButton.mousePressed(pausePressed);
-    // pauseButton.hide();
-
-    // resumeButton = createButton("Resume");
-    // resumeButton.class("baseButton");
-    // resumeButton.parent(hud);
-    // resumeButton.mousePressed(resumePressed);
-    // resumeButton.hide();
-
-    // resetButton = createButton("Reset");
-    // resetButton.class("baseButton");
-    // resetButton.parent(hud);
-    // resetButton.mousePressed(resetPressed);
 }
 
 function hudOnGameRunning() {
@@ -135,31 +104,6 @@ function hudOnGameEnd(hasWon) {
         endTextWon.hide();
         endTextLost.show();
     }
-}
-
-function startPressed() {
-    startGame();
-    startButton.hide();
-    pauseButton.show();
-}
-
-function pausePressed() {
-    pauseGame();
-    pauseButton.hide();
-    resumeButton.show();
-}
-
-function resumePressed() {
-    resumeGame();
-    resumeButton.hide();
-    pauseButton.show();
-}
-
-function resetPressed() {
-    restartGame();
-    // resumeButton.hide();
-    // pauseButton.hide();
-    // startButton.show();
 }
 
 async function rockPressed() {
