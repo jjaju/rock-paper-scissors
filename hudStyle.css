@@ -2,12 +2,10 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 7vmin;
-    padding-left: 2vmin;
-    padding-right: 2vmin;
+    padding: 3vmin;
     top: 50%;
     left: 50%;
     border-radius: 7px;
@@ -25,10 +23,12 @@
 
 .largeHeading {
     font-size: 15vmin;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .heading {
-    font-size: 7vmin;
+    font-size: 10vmin;
 }
 
 .message {
@@ -41,15 +41,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 2vmin;
 }
 
 .handChooser {
+    padding: 2vmin;
     position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 15vmin;
+    margin: 0vmin;
+    width: fit-content;
+    height: fit-content;
 }
 
 .iconButton {
@@ -57,16 +61,18 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 20vw;
-    height: 20vh;
+    width: 20vmin;
+    height: 20vmin;
     border: none;
+    margin-left: 1vmin;
+    margin-right: 1vmin;
     background-color: transparent;
     transition: opacity 600ms, visibility 600ms;
 }
 
 .iconToChoose {
-    max-width: 15vw;
-    max-height: 15vw;
+    max-width: 15vmin;
+    max-height: 15vmin;
 }
 
 .iconToChoose:hover {
