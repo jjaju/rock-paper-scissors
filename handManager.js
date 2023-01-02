@@ -4,11 +4,12 @@ var papers = [];
 var scissors = [];
 var handCollections = [rocks, papers, scissors];
 var hands = [];
+var numHandsPerType = 20;
 
 function initHands() {
     hands = [];
     for (let j = 0; j < 3; j++) {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < numHandsPerType; i++) {
             hands.push(new Hand(getRandomPosition(), j));
         }
     }
@@ -34,20 +35,21 @@ function checkEndGame() {
 function computeCentroid(hands) {
     if (!hands.length) return createVector(-1, -1);
     else {
-        let sumX = 0;
-        let sumY = 0;
+        let sum = createVector(0, 0);
         for (const hand of hands) {
-            sumX += hand.pos.x;
-            sumY += hand.pos.y;
+            sum.add(hand.pos);
         }
-        sumX /= hands.length;
-        sumY /= hands.length;
-        return createVector(sumX, sumY);
+        sum.div(hands.length);
+        return sum;
     }
 }
 
-function getNearestNeighbours(hand, hands, n) {
-    sorted = hands.slice();
-    sorted.sort((a, b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
-    return sorted.slice(0, n);
+function getNearestEnemy(hand, hands){
+    hands.sort((a,b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
+    return hands[0];
+}
+
+function getNearestFriend(hand, hands){
+    hands.sort((a,b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
+    return hands[1];
 }

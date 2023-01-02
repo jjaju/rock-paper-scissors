@@ -39,3 +39,7 @@ function endGame() {
         pauseDraw();
     }
 }
+
+function diffusionAllowed() {
+    return gameState == state.running;
+}

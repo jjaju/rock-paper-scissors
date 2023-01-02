@@ -5,6 +5,7 @@ let fr = 30;
 
 function preload() {
     initHud();
+    initInteraction();
     //initTypeSoundMapping();
     initTypeIconMapping();
     initGameState();
@@ -12,7 +13,8 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+    let cv = createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+    cv.mousePressed(tryDiffuse);
     frameRate(fr);
     initHandDisplay();
 }
@@ -32,7 +34,13 @@ function getRandomPosition() {
 }
 
 function mousePressed() {
-    userStartAudio();
+    //userStartAudio();
+}
+
+function tryDiffuse() {
+    if (diffusionAllowed()) {
+        diffuse(createVector(mouseX, mouseY));
+    }
 }
 
 function initHandDisplay() {
