@@ -61,14 +61,11 @@ function Hand(pos, type) {
     };
 
     this.calculateStandardVel = function () {
-        if (this.notTouchedSince < TOUCH_TIMER) {
-            return this.vel.mult(TOUCH_VEL_DECAY);
-        }
-        let fleeNN = getNearestNeighbour(
+        let fleeNN = getNearestEnemy(
             this,
             handCollections[this.getFleeType()]
         );
-        let targetNN = getNearestNeighbour(
+        let targetNN = getNearestEnemy(
             this,
             handCollections[this.getTargetType()]
         );
@@ -94,6 +91,16 @@ function Hand(pos, type) {
         if (individualFleeWeight + individualTargetWeight < 1) {
             newVel.normalize().mult(1 - min(individualFleeWeight * 2, 0.8));
         }
+
+        // keep distance from hands of same type
+        let friendNN = getNearestFriend(this, handCollections[this.type]);
+        let friendCentroid = !friendNN ? createVector(-1, -1) : friendNN.pos.copy();
+        let individualFriendWeight = !friendNN ? 0 : -1;
+        let fromFriend = (friendCentroid.sub(this.pos.copy())).mult(individualFriendWeight);
+        if (fromFriend.mag() < lethalDistance) {
+            newVel.add(fromFriend.normalize().mult(0.5));
+        }
+        
         newVel.mult(movementSpeed).mult(this.individualSpeed);
         return newVel;
     };

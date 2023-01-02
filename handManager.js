@@ -44,13 +44,12 @@ function computeCentroid(hands) {
     }
 }
 
-function getNearestNeighbours(hand, hands, n) {
-    sorted = hands.slice();
-    sorted.sort((a, b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
-    return sorted.slice(0, n);
-}
-
-function getNearestNeighbour(hand, hands){
+function getNearestEnemy(hand, hands){
     hands.sort((a,b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
     return hands[0];
+}
+
+function getNearestFriend(hand, hands){
+    hands.sort((a,b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
+    return hands[1];
 }
