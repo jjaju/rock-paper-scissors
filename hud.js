@@ -152,15 +152,15 @@ function visibleStartScreen() {
     startScreen.style("opacity", "1");
 }
 
-function invisibleIcons(icons) {
-    for (icon of icons) {
+function invisibleIcons(iconsToChange) {
+    for (icon of iconsToChange) {
         icon.style("visibility", "hidden");
         icon.style("opacity", "0");
     }
 }
 
-function visibleIcons(icons) {
-    for (icon of icons) {
+function visibleIcons(iconsToChange) {
+    for (icon of iconsToChange) {
         icon.style("visibility", "visible");
         icon.style("opacity", "1");
     }
