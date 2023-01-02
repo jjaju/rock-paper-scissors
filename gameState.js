@@ -8,13 +8,11 @@ function initGameState() {
     hudOnBeforeStart();
 }
 
-async function startGame(typeToPlay) {
-    currentlyPlayingAs = typeToPlay;
+function startGame(typeToPlay) {
     if (gameState == state.beforeStart || gameState == state.ended) {
+        currentlyPlayingAs = typeToPlay;
         gameState = state.running;
         resumeDraw();
-        await delay(2000);
-        hudOnGameRunning();
     }
 }
 
@@ -28,26 +26,6 @@ function endGame(typeThatWon) {
         gameWon = true;
     }
     hudOnGameEnd(gameWon);
-}
-
-function restartGame() {
-    gameState = state.beforeStart;
-    pauseDraw();
-    initHandDisplay();
-}
-
-function resumeGame() {
-    if (gameState == state.paused) {
-        gameState = state.running;
-        resumeDraw();
-    }
-}
-
-function pauseGame() {
-    if (gameState == state.running) {
-        gameState = state.paused;
-        pauseDraw();
-    }
 }
 
 function diffusionAllowed() {

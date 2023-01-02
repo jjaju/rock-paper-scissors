@@ -15,13 +15,11 @@ let scissorButton;
 let scissorToChoose;
 
 function initHud() {
-    hud = createElement("hud");
-    hud.class("hud");
-
     startScreen = createDiv();
     startScreen.class("startScreen");
     startScreen.hide();
 
+    // start screen
     welcomeMessage = createDiv();
     welcomeMessage.class("welcomeMessage");
     welcomeMessage.parent(startScreen);
@@ -34,6 +32,7 @@ function initHud() {
     chooseText.class("text message");
     chooseText.parent(welcomeMessage);
 
+    // end screen
     endMessage = createDiv();
     endMessage.class("welcomeMessage");
     endMessage.parent(startScreen);
@@ -50,6 +49,7 @@ function initHud() {
     chooseTextEnd.class("text message");
     chooseTextEnd.parent(endMessage);
 
+    // hand chooser
     handChooser = createDiv();
     handChooser.class("handChooser");
     handChooser.parent(startScreen);
@@ -112,6 +112,8 @@ async function rockPressed() {
     await delay(1000);
     invisibleStartScreen();
     startGame(handType.ROCK);
+    await delay(2000);
+    hudOnGameRunning();
 }
 
 async function paperPressed() {
@@ -120,6 +122,8 @@ async function paperPressed() {
     await delay(1000);
     invisibleStartScreen();
     startGame(handType.PAPER);
+    await delay(2000);
+    hudOnGameRunning();
 }
 
 async function scissorPressed() {
@@ -128,6 +132,8 @@ async function scissorPressed() {
     await delay(1000);
     invisibleStartScreen();
     startGame(handType.SCISSOR);
+    await delay(2000);
+    hudOnGameRunning();
 }
 
 function checkIfRestart() {
