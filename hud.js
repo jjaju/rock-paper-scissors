@@ -1,9 +1,26 @@
+let startScreen;
+let welcomeMessage;
+let welcomeText;
+let chooseText;
+let endMessage;
+let endTextLost;
+let endTextWon;
+let chooseTextEnd;
+let handChooser;
+let rockButton;
+let rockToChoose;
+let paperButton;
+let paperToChoose;
+let scissorButton;
+let scissorToChoose;
+
 function initHud() {
     hud = createElement("hud");
     hud.class("hud");
 
     startScreen = createDiv();
     startScreen.class("startScreen");
+    startScreen.hide();
 
     welcomeMessage = createDiv();
     welcomeMessage.class("welcomeMessage");
@@ -16,6 +33,22 @@ function initHud() {
     chooseText = createSpan("Choose your hand to start new game:");
     chooseText.class("text message");
     chooseText.parent(welcomeMessage);
+
+    endMessage = createDiv();
+    endMessage.class("welcomeMessage");
+    endMessage.parent(startScreen);
+
+    endTextLost = createSpan("You Lost!");
+    endTextLost.class("text largeHeading");
+    endTextLost.parent(endMessage);
+
+    endTextWon = createSpan("You Won!");
+    endTextWon.class("text largeHeading");
+    endTextWon.parent(endMessage);
+
+    chooseTextEnd = createSpan("Choose your hand to start new game:");
+    chooseTextEnd.class("text message");
+    chooseTextEnd.parent(endMessage);
 
     handChooser = createDiv();
     handChooser.class("handChooser");
@@ -56,27 +89,52 @@ function initHud() {
     // scissorToChoose.class("iconToChoose");
     // scissorToChoose.parent(handChooser);
 
-    startButton = createButton("Start");
-    startButton.class("baseButton");
-    startButton.parent(hud);
-    startButton.mousePressed(startPressed);
+    // startButton = createButton("Start");
+    // startButton.class("baseButton");
+    // startButton.parent(hud);
+    // startButton.mousePressed(startPressed);
+    // startButton.hide();
 
-    pauseButton = createButton("Pause");
-    pauseButton.class("baseButton");
-    pauseButton.parent(hud);
-    pauseButton.mousePressed(pausePressed);
-    pauseButton.hide();
+    // pauseButton = createButton("Pause");
+    // pauseButton.class("baseButton");
+    // pauseButton.parent(hud);
+    // pauseButton.mousePressed(pausePressed);
+    // pauseButton.hide();
 
-    resumeButton = createButton("Resume");
-    resumeButton.class("baseButton");
-    resumeButton.parent(hud);
-    resumeButton.mousePressed(resumePressed);
-    resumeButton.hide();
+    // resumeButton = createButton("Resume");
+    // resumeButton.class("baseButton");
+    // resumeButton.parent(hud);
+    // resumeButton.mousePressed(resumePressed);
+    // resumeButton.hide();
 
-    resetButton = createButton("Reset");
-    resetButton.class("baseButton");
-    resetButton.parent(hud);
-    resetButton.mousePressed(resetPressed);
+    // resetButton = createButton("Reset");
+    // resetButton.class("baseButton");
+    // resetButton.parent(hud);
+    // resetButton.mousePressed(resetPressed);
+}
+
+function hudOnGameRunning() {
+    startScreen.hide();
+}
+
+function hudOnBeforeStart() {
+    showElement(startScreen);
+    endMessage.hide();
+}
+
+function hudOnGameEnd(hasWon) {
+    showElement(startScreen);
+    visibleStartScreen();
+    visibleIcons([rockButton, paperButton, scissorButton]);
+    welcomeMessage.hide();
+    showElement(endMessage);
+    if (hasWon) {
+        endTextLost.hide();
+        endTextWon.show();
+    } else {
+        endTextWon.hide();
+        endTextLost.show();
+    }
 }
 
 function startPressed() {
@@ -99,42 +157,67 @@ function resumePressed() {
 
 function resetPressed() {
     restartGame();
-    resumeButton.hide();
-    pauseButton.hide();
-    startButton.show();
+    // resumeButton.hide();
+    // pauseButton.hide();
+    // startButton.show();
 }
 
 async function rockPressed() {
-    scissorButton.style('visibility', 'hidden');
-    scissorButton.style('opacity', '0');
-    paperButton.style('visibility', 'hidden');
-    paperButton.style('opacity', '0');
-    await delay(1000)
-    hideStartScreen()
-    startGame()
+    invisibleIcons([scissorButton, paperButton]);
+    checkIfRestart();
+    await delay(1000);
+    invisibleStartScreen();
+    startGame(handType.ROCK);
 }
 
 async function paperPressed() {
-    scissorButton.style('visibility', 'hidden');
-    scissorButton.style('opacity', '0');
-    rockButton.style('visibility', 'hidden');
-    rockButton.style('opacity', '0');
-    await delay(1000)
-    hideStartScreen()
+    invisibleIcons([scissorButton, rockButton]);
+    checkIfRestart();
+    await delay(1000);
+    invisibleStartScreen();
+    startGame(handType.PAPER);
 }
 
 async function scissorPressed() {
-    rockButton.style('visibility', 'hidden');
-    rockButton.style('opacity', '0');
-    paperButton.style('visibility', 'hidden');
-    paperButton.style('opacity', '0');
-    await delay(1000)
-    hideStartScreen()
+    invisibleIcons([rockButton, paperButton]);
+    checkIfRestart();
+    await delay(1000);
+    invisibleStartScreen();
+    startGame(handType.SCISSOR);
 }
 
-function hideStartScreen() {
-    startScreen.style('visibility', 'hidden');
-    startScreen.style('opacity', '0');
+function checkIfRestart() {
+    if (hasEnded()) {
+        initHandDisplay();
+    }
 }
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
+function invisibleStartScreen() {
+    startScreen.style("visibility", "hidden");
+    startScreen.style("opacity", "0");
+}
+
+function visibleStartScreen() {
+    startScreen.style("visibility", "visible");
+    startScreen.style("opacity", "1");
+}
+
+function invisibleIcons(icons) {
+    for (icon of icons) {
+        icon.style("visibility", "hidden");
+        icon.style("opacity", "0");
+    }
+}
+
+function visibleIcons(icons) {
+    for (icon of icons) {
+        icon.style("visibility", "visible");
+        icon.style("opacity", "1");
+    }
+}
+
+function showElement(el) {
+    el.style("display", "flex");
+}
+
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));

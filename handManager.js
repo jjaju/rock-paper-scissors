@@ -24,11 +24,16 @@ function updateHandCollections() {
 
 function checkEndGame() {
     let emptyCollections = 0;
-    for (coll of handCollections) {
-        emptyCollections = (coll.length != 0) ? emptyCollections : emptyCollections + 1;
+    let notEmpty = handType.ROCK;
+    for ([type, coll] of handCollections.entries()) {
+        emptyCollections =
+            coll.length != 0 ? emptyCollections : emptyCollections + 1;
+        if (coll.length != 0) {
+            notEmpty = type;
+        }
     }
     if (emptyCollections > 1) {
-        endGame();
+        endGame(notEmpty);
     }
 }
 
@@ -44,12 +49,12 @@ function computeCentroid(hands) {
     }
 }
 
-function getNearestEnemy(hand, hands){
-    hands.sort((a,b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
+function getNearestEnemy(hand, hands) {
+    hands.sort((a, b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
     return hands[0];
 }
 
-function getNearestFriend(hand, hands){
-    hands.sort((a,b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
+function getNearestFriend(hand, hands) {
+    hands.sort((a, b) => a.pos.dist(hand.pos) - b.pos.dist(hand.pos));
     return hands[1];
 }

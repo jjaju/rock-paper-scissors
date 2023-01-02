@@ -11,7 +11,7 @@ var movementSpeed;
 function Hand(pos, type) {
     this.pos = pos.copy();
     this.type = type;
-    this.individualSpeed = Math.random() * 0.5 + 0.75;
+    this.individualSpeed = Math.random() * 0.5 + 2.75;
     this.vel = createVector(0, 0);
     this.notTouchedSince = TOUCH_TIMER;
 
