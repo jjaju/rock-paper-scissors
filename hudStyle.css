@@ -4,8 +4,10 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    text-align: center;
     padding-top: 7vmin;
-    padding-left: 0vmin;
+    padding-left: 2vmin;
+    padding-right: 2vmin;
     top: 50%;
     left: 50%;
     border-radius: 7px;
