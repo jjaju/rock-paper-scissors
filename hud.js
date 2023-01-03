@@ -13,6 +13,13 @@ let paperButton;
 let paperToChoose;
 let scissorButton;
 let scissorToChoose;
+let settingsMenu;
+let settingsButton;
+let settingsIcon;
+let settingsContainer;
+let speedSlider;
+let inSettings = false;
+let lastMessage;
 
 function initHud() {
     startScreen = createDiv();
@@ -80,6 +87,60 @@ function initHud() {
     scissorToChoose = createImg("./assets/scissorCropped.png", "");
     scissorToChoose.class("iconToChoose");
     scissorToChoose.parent(scissorButton);
+
+    // settings Menu
+    settingsMenu = createDiv();
+    settingsMenu.class("welcomeMessage");
+    settingsMenu.parent(startScreen);
+    settingsMenu.hide();
+
+    settingsButton = createButton("");
+    settingsButton.class("settingsButton");
+    settingsButton.parent(startScreen);
+    settingsButton.mousePressed(settingsPressed);
+
+    settingsIcon = createImg("./assets/rockCropped.png", "");
+    settingsIcon.class("settingsIcon");
+    settingsIcon.parent(settingsButton);
+
+    settingsHeading = createSpan("Settings");
+    settingsHeading.class("text heading");
+    settingsHeading.parent(settingsMenu);
+
+    settingsContainer = createDiv();
+    settingsContainer.class("settingsContainer");
+    settingsContainer.parent(settingsMenu);
+
+    speedText = createSpan("Speed:");
+    speedText.class("text message settingsTextLeft");
+    speedText.parent(settingsContainer);
+
+    speedSlider = createSlider(
+        0.1, 
+        min(SCREEN_WIDTH, SCREEN_HEIGHT) / 50, 
+        min(SCREEN_WIDTH, SCREEN_HEIGHT) / 250, 
+        0
+    );
+    speedSlider.parent(settingsContainer);
+    speedSlider.mouseReleased(setSpeed);
+    
+    setSpeed(); //Note: should probably happen somewhere else (hand.js)
+    
+    clickTip = createSpan("Tip:");
+    clickTip.class("text message settingsTextLeft");
+    clickTip.parent(settingsContainer);
+
+    clickText = createSpan("Click the canvas to bump nearby pieces!");
+    clickText.class("text message settingsTextLeft");
+    clickText.parent(settingsContainer);
+    
+    starTip = createSpan("Pro Tip:");
+    starTip.class("text message settingsTextLeft");
+    starTip.parent(settingsContainer);
+
+    starText = createA("https://github.com/jjaju/rock-paper-scissors", "Give us a star!", "_blank");
+    starText.class("text message settingsTextLeft");
+    starText.parent(settingsContainer);
 }
 
 function hudOnGameRunning() {
@@ -89,12 +150,13 @@ function hudOnGameRunning() {
 function hudOnBeforeStart() {
     showElement(startScreen);
     endMessage.hide();
+    lastMessage = welcomeMessage;
 }
 
 function hudOnGameEnd(hasWon) {
     showElement(startScreen);
     visibleStartScreen();
-    visibleIcons([rockButton, paperButton, scissorButton]);
+    visibleIcons([rockButton, paperButton, scissorButton, settingsButton]);
     welcomeMessage.hide();
     showElement(endMessage);
     if (hasWon) {
@@ -104,36 +166,57 @@ function hudOnGameEnd(hasWon) {
         endTextWon.hide();
         endTextLost.show();
     }
+    settingsMenu.hide();
+    showElement(handChooser);
+    lastMessage = endMessage;
+}
+
+function setSpeed(){
+    movementSpeed = speedSlider.value();
 }
 
 async function rockPressed() {
-    invisibleIcons([scissorButton, paperButton]);
+    invisibleIcons([scissorButton, paperButton, settingsButton]);
     checkIfRestart();
-    await delay(1000);
+    await customDelay(1000);
     invisibleStartScreen();
     startGame(handType.ROCK);
-    await delay(2000);
+    await customDelay(2000);
     hudOnGameRunning();
 }
 
 async function paperPressed() {
-    invisibleIcons([scissorButton, rockButton]);
+    invisibleIcons([scissorButton, rockButton, settingsButton]);
     checkIfRestart();
-    await delay(1000);
+    await customDelay(1000);
     invisibleStartScreen();
     startGame(handType.PAPER);
-    await delay(2000);
+    await customDelay(2000);
     hudOnGameRunning();
 }
 
 async function scissorPressed() {
-    invisibleIcons([rockButton, paperButton]);
+    invisibleIcons([rockButton, paperButton, settingsButton]);
     checkIfRestart();
-    await delay(1000);
+    await customDelay(1000);
     invisibleStartScreen();
     startGame(handType.SCISSOR);
-    await delay(2000);
+    await customDelay(2000);
     hudOnGameRunning();
+}
+
+function settingsPressed() {
+    if (inSettings) {
+        showElement(lastMessage);
+        showElement(handChooser);
+        settingsMenu.hide();
+    }
+    else {
+        lastMessage.hide();
+        handChooser.hide();
+        showElement(settingsMenu);
+    }
+    inSettings = !inSettings;
 }
 
 function checkIfRestart() {
@@ -170,4 +253,4 @@ function showElement(el) {
     el.style("display", "flex");
 }
 
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+const customDelay = (ms) => new Promise((res) => setTimeout(res, ms));

@@ -117,5 +117,4 @@ function Hand(pos, type) {
 function initHandsData() {
     iconSize = min(SCREEN_WIDTH, SCREEN_HEIGHT) / 4;
     lethalDistance = iconSize * 0.23;
-    movementSpeed = min(SCREEN_WIDTH, SCREEN_HEIGHT) / 250;
 }
