@@ -16,6 +16,7 @@ let scissorToChoose;
 let settingsMenu;
 let settingsButton;
 let settingsIcon;
+let backIcon;
 let settingsContainer;
 let speedSlider;
 let inSettings = false;
@@ -99,10 +100,15 @@ function initHud() {
     settingsButton.parent(startScreen);
     settingsButton.mousePressed(settingsPressed);
 
-    settingsIcon = createImg("./assets/rockCropped.png", "");
+    settingsIcon = createImg("./assets/settingsIcon.png", "");
     settingsIcon.class("settingsIcon");
     settingsIcon.parent(settingsButton);
-
+    
+    backIcon = createImg("./assets/backArrow.png", "");
+    backIcon.class("settingsIcon");
+    backIcon.parent(settingsButton);
+    backIcon.hide();
+    
     settingsHeading = createSpan("Settings");
     settingsHeading.class("text heading");
     settingsHeading.parent(settingsMenu);
@@ -166,7 +172,7 @@ function hudOnGameEnd(hasWon) {
         endTextWon.hide();
         endTextLost.show();
     }
-    settingsMenu.hide();
+    resetSettingsMenu()
     showElement(handChooser);
     lastMessage = endMessage;
 }
@@ -209,12 +215,16 @@ function settingsPressed() {
     if (inSettings) {
         showElement(lastMessage);
         showElement(handChooser);
+        showElement(settingsIcon);
+        backIcon.hide();
         settingsMenu.hide();
     }
     else {
         lastMessage.hide();
         handChooser.hide();
+        settingsIcon.hide()
         showElement(settingsMenu);
+        showElement(backIcon);
     }
     inSettings = !inSettings;
 }
@@ -251,6 +261,13 @@ function visibleIcons(iconsToChange) {
 
 function showElement(el) {
     el.style("display", "flex");
+}
+
+function resetSettingsMenu() {
+    settingsMenu.hide();
+    backIcon.hide();
+    showElement(settingsIcon);
+    inSettings = false;
 }
 
 const customDelay = (ms) => new Promise((res) => setTimeout(res, ms));

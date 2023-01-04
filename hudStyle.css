@@ -87,8 +87,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 5vmin;
-    height: 5vmin;
+    width: 7vmin;
+    height: 7vmin;
     border: none;
     margin: 2vmin;
     background-color: transparent;
@@ -96,8 +96,8 @@
 }
 
 .settingsIcon{
-    max-width: 5vmin;
-    max-height: 5vmin;
+    max-width: 7vmin;
+    max-height: 7vmin;
 }
 
 .settingsIcon:hover {
