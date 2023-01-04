@@ -81,3 +81,41 @@
     padding: 2vmin;
     border: 2px solid #b12929;
 }
+
+.settingsButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 7vmin;
+    height: 7vmin;
+    border: none;
+    margin: 2vmin;
+    background-color: transparent;
+    transition: opacity 600ms, visibility 600ms;
+}
+
+.settingsIcon{
+    max-width: 7vmin;
+    max-height: 7vmin;
+}
+
+.settingsIcon:hover {
+    background-color: #0e0e0e;
+    border-radius: 7px;
+    padding: 1vmin;
+    border: 2px solid #b12929;
+}
+
+.settingsContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 5vmin;
+    padding-top: 5vmin; 
+    padding-bottom: 5vmin; 
+}
+
+.settingsTextLeft {
+    text-align: left;
+}
