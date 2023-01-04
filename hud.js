@@ -128,7 +128,7 @@ function initHud() {
         0
     );
     speedSlider.parent(settingsContainer);
-    speedSlider.mouseReleased(setSpeed);
+    // speedSlider.mouseReleased(setSpeed);
     
     setSpeed(); //Note: should probably happen somewhere else (hand.js)
     
@@ -212,6 +212,8 @@ async function scissorPressed() {
 }
 
 function settingsPressed() {
+    // update movement speed on entering and leaving settings menu.
+    setSpeed()
     if (inSettings) {
         showElement(lastMessage);
         showElement(handChooser);
