@@ -1,4 +1,4 @@
-<img src="assets/rockTransp.png" width="200"/> <img src="assets/paperTransp.png" width="200"/> <img src="assets/scissorTransp.png" width="200"/> 
+<img src="assets/rockCropped.png" width="80"/> &nbsp;&nbsp; <img src="assets/paperCropped.png" width="60"/> &nbsp;&nbsp; <img src="assets/scissorCropped.png" width="90"/> 
 
 # rock-paper-scissors
 
